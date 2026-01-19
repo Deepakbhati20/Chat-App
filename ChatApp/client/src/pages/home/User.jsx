@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedUser } from "../../store/slice/user/user.slice";
+import defaultAvatar from "../../dp-image.jpg";
 
 const User = ({ userDetails }) => {
 
@@ -23,7 +24,11 @@ const User = ({ userDetails }) => {
     >
       <div className={`avatar ${isUserOnline && 'online'}`}>
         <div className="w-12 rounded-full">
-          <img src={userDetails?.avatar} />
+          <img src={userDetails?.avatar} 
+                  onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = defaultAvatar; // local fallback
+          }} />
         </div>
       </div>
       <div>

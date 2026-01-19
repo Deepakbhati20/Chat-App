@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import defaultAvatar from "../../dp-image.jpg";
 
 const Message = ({ messageDetails }) => {
   const messageRef = useRef(null);
@@ -32,6 +33,10 @@ const Message = ({ messageDetails }) => {
                   ? userProfile?.avatar
                   : selectedUser?.avatar
               }
+              onError={(e)=>{
+                e.target.onError = null;
+                e.target.src = defaultAvatar;
+              }}
             />
           </div>
         </div>

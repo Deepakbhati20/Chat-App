@@ -6,6 +6,7 @@ import {
   getOtherUsersThunk,
   logoutUserThunk,
 } from "../../store/slice/user/user.thunk";
+import defaultAvatar from "../../dp-image.jpg";
 
 const UserSidebar = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -73,7 +74,12 @@ const UserSidebar = () => {
         <div className="flex items-center gap-3">
           <div className="avatar">
             <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
-              <img src={userProfile?.avatar} />
+              <img src={userProfile?.avatar}
+                    onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = defaultAvatar; // local fallback
+                }}
+               />
             </div>
           </div>
           <h2>{userProfile?.username}</h2>
